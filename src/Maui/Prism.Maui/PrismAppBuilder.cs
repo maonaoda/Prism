@@ -65,9 +65,8 @@ public sealed class PrismAppBuilder
                         return false;
 
                     var window = windows.First(x => x.IsActive);
-                    if(window.IsRootPage && app is Application application)
+                    if (window.IsRootPage && app is Application application)
                     {
-                        application.Quit();
                         return false;
                     }
 

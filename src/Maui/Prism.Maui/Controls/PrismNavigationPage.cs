@@ -9,6 +9,8 @@ namespace Prism.Controls;
 /// </summary>
 public class PrismNavigationPage : NavigationPage
 {
+    INavigationPageController NavigationPageController => this;
+
     /// <summary>
     /// Creates a new instance of the <see cref="PrismNavigationPage"/>
     /// </summary>
@@ -33,7 +35,15 @@ public class PrismNavigationPage : NavigationPage
     /// <inheritdoc/>
     protected override bool OnBackButtonPressed()
     {
-        BackButtonPressed.Invoke(this, EventArgs.Empty);
+        if (CurrentPage.SendBackButtonPressed())
+            return true;
+
+        if (NavigationPageController.StackDepth > 1)
+        {
+            BackButtonPressed.Invoke(this, EventArgs.Empty);
+            return true;
+        }
+
         return false;
     }
 
