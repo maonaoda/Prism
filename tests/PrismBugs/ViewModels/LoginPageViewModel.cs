@@ -9,11 +9,22 @@ namespace PrismBugs.ViewModels
     {
         public readonly INavigationService _navigationService;
 
+        public ReactiveCommand<Unit> GoTabbedPage1Command { get; set; }
+
         public ReactiveCommand<Unit> LoginCommand { get; set; }
 
         public LoginPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+
+            GoTabbedPage1Command = new ReactiveCommand<Unit>();
+            GoTabbedPage1Command.SubscribeAwait(async (_, ct) =>
+            {
+                var result = await navigationService
+                    .CreateBuilder()
+                    .AddSegment(nameof(TabbedPage1))
+                    .NavigateAsync();
+            }, AwaitOperation.Drop);
 
             LoginCommand = new ReactiveCommand<Unit>();
             LoginCommand.SubscribeAwait(async (_, ct) =>

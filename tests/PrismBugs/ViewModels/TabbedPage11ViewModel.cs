@@ -1,4 +1,4 @@
-﻿using Prism.Navigation;
+using Prism.Navigation;
 using PrismBugs.Views;
 using PrismBugs.Views.Controls;
 using R3;

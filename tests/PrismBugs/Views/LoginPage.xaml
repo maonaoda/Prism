@@ -5,9 +5,16 @@
              x:DataType="viewModels:LoginPageViewModel"
              x:Class="PrismBugs.Views.LoginPage">
 
-    <Grid RowDefinitions="*,60,*" ColumnDefinitions="*"
+    <Grid RowDefinitions="*,auto,auto,*" ColumnDefinitions="*" RowSpacing="60"
             Padding="30,0">
-        <Button Grid.Row="1"
+      
+    <Button Grid.Row="1"
+                Text="Go to TabbedPage11" 
+                SemanticProperties.Hint="Click to TabbedPage11"
+                Command="{Binding GoTabbedPage1Command}"
+                HorizontalOptions="Center"/>
+
+    <Button Grid.Row="2"
                 Text="Login" 
                 SemanticProperties.Hint="Click to Login"
                 Command="{Binding LoginCommand}"

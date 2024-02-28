@@ -5,6 +5,7 @@ namespace PrismBugs.Views.Controls
 {
     public class BaseNavigationPage : PrismNavigationPage
     {
+        //#if ANDROID
         //        INavigationPageController NavigationPageController => this;
 
         //        public new event EventHandler BackButtonPressed;
@@ -22,6 +23,24 @@ namespace PrismBugs.Views.Controls
         //            BarTextColor = Colors.White;
         //        }
 
+        //        private async void HandleBackButtonPressed(object sender, EventArgs args)
+        //        {
+        //            await MvvmHelpers.HandleNavigationPageGoBack(this);
+        //        }
+        //#else
+        //        public BaseNavigationPage()
+        //        {
+        //            BarTextColor = Colors.White;
+        //        }
+
+        //        public BaseNavigationPage(Page page)
+        //            : base(page)
+        //        {
+        //            BarTextColor = Colors.White;
+        //        }
+
+        //#endif
+
         //        protected override bool OnBackButtonPressed()
         //        {
         //#if ANDROID
@@ -38,11 +57,6 @@ namespace PrismBugs.Views.Controls
         //#else
         //            return base.OnBackButtonPressed();
         //#endif
-        //        }
-
-        //        private async void HandleBackButtonPressed(object sender, EventArgs args)
-        //        {
-        //            await MvvmHelpers.HandleNavigationPageGoBack(this);
         //        }
     }
 }
