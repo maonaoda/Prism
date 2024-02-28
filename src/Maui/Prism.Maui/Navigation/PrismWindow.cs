@@ -2,7 +2,6 @@ using System.ComponentModel;
 using Prism.AppModel;
 using Prism.Common;
 using Prism.Dialogs;
-using Prism.Ioc;
 using Prism.Navigation.Xaml;
 using TabbedPage = Microsoft.Maui.Controls.TabbedPage;
 
@@ -24,18 +23,23 @@ internal class PrismWindow : Window
 
     internal Page CurrentPage => Page is null ? null : MvvmHelpers.GetCurrentPage(Page);
 
-    internal bool IsRootPage => Page switch
+    internal bool IsRootPage => GetCurrentPage(Page) == CurrentPage;
+
+    private static Page GetCurrentPage(Page page)
     {
-        TabbedPage tabbed => tabbed.CurrentPage,
-        NavigationPage nav => nav.RootPage,
-        _ => Page
-    } == CurrentPage;
+        return page switch
+        {
+            TabbedPage tabbed => tabbed.CurrentPage,
+            NavigationPage nav => nav.RootPage is TabbedPage tabbedPage ? GetCurrentPage(tabbedPage.CurrentPage) : nav.RootPage,
+            _ => page
+        };
+    }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public void OnSystemBack()
     {
         var currentPage = CurrentPage;
-        if(currentPage?.Parent is NavigationPage navPage)
+        if (currentPage?.Parent is NavigationPage navPage)
         {
             // The NavigationPage has already taken care of the GoBack
             return;
