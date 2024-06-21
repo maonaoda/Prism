@@ -78,10 +78,6 @@ public sealed class PrismAppBuilder
                     if (window is null)
                         return false;
 
-                    if (window.CurrentPage?.Parent is NavigationPage)
-                    {
-                        return true;
-                    }
 
                     if(window.IsRootPage)
                     {

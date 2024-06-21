@@ -469,7 +469,14 @@ public class PageNavigationService : INavigationService, IRegistryAware
         }
         else if (currentPage is TabbedPage tabbed)
         {
-            await ProcessNavigationForTabbedPage(tabbed, nextSegment, segments, parameters, useModalNavigation, pageAnimation);
+            if (tabbed.Parent is NavigationPage tabNav)
+            {
+                await ProcessNavigationForNavigationPage(tabNav, nextSegment, segments, parameters, useModalNavigation, pageAnimation);
+            }
+            else
+            {
+                await ProcessNavigationForTabbedPage(tabbed, nextSegment, segments, parameters, useModalNavigation, pageAnimation);
+            }
         }
         else if (currentPage is FlyoutPage flyout)
         {
