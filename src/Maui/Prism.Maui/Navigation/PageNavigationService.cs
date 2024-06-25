@@ -871,7 +871,7 @@ public class PageNavigationService : INavigationService, IRegistryAware
             {
                 MvvmHelpers.OnNavigatedFrom(tabbedPage, parameters);
             }
-            if (tabbedPage.CurrentPage is NavigationPage navigationPage)
+            else if (tabbedPage.CurrentPage is NavigationPage navigationPage)
             {
                 MvvmHelpers.OnNavigatedFrom(navigationPage.CurrentPage, parameters);
             }
